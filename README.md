@@ -91,7 +91,7 @@ Uploads the file
 
 `$uploader->uploadFile();`
 
-## Extending
+## Config by Extending the FileUploader Class
 
 For a cleaner way to configure you uploads you can extend the FileUploader class which will give you access to the protected
 variables, e.g.:
@@ -100,11 +100,11 @@ variables, e.g.:
 
 class ImageUploader extends FileUploader{
 
-  protected $allowedMimeTypes = [
-    'image/jpeg',
-    'image/png',
-    'image/gif'
-  ]
+	protected $allowedMimeTypes = [
+		'image/jpeg',
+		'image/png',
+		'image/gif'
+	];
   
 	protected $maxFileSize = 5e+6; // In bytes (this is 5MB or 5000000 bytes)
 	protected $makeFilenameUnique = true;
