@@ -20,7 +20,7 @@ The FileUploader accepts a FileUploader\File object. You can easily retrieve an 
 
 This can then be passed in to the FileUploader:
 
-`$uploader = new FileUploader($file);`
+`$uploader = new FileUploader\FileUploader($file);`
 
 You can then upload the file as follows:
 
