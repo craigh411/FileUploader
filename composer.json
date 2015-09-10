@@ -1,0 +1,26 @@
+{
+  "name": "craigh/file-uploader",
+  "description": "Allows file uploads via web form",
+  "type": "library",
+  "license": "mit",
+  "authors": [
+    {
+      "name": "Craig Humphreys"
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "4.8.5",
+    "exposer/class-exposer": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "FileUploader\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FileUploader\\Tests\\": "tests"
+    }
+  },
+  "minimum-stability": "dev"
+}

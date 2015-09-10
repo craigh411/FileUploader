@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bf110a32-9fe0-4606-b899-9d0a4f7d82f9" name="Default" comment="" />
+    <ignored path="FileUploader.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/FileUploader$FileUploaderTest.coverage" NAME="FileUploaderTest Coverage Results" MODIFIED="1441896246930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="PhpCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="FileUploader" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="FileUploaderTest.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/FileUploaderTest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="3.5593526">
+              <caret line="188" column="122" selection-start-line="188" selection-start-column="122" selection-end-line="188" selection-end-column="122" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Html5" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/FileUploader/Contracts/Uploader.php" />
+        <option value="$PROJECT_DIR$/src/FileUploader/File.php" />
+        <option value="$PROJECT_DIR$/tests/phpunit.xml.dist" />
+        <option value="$PROJECT_DIR$/src/FileUploader/FileUploader.php" />
+        <option value="$PROJECT_DIR$/tests/phpunit.xml" />
+        <option value="$PROJECT_DIR$/src/File.php" />
+        <option value="$PROJECT_DIR$/tests/MockUploader.php" />
+        <option value="$PROJECT_DIR$/src/Contracts/Uploader.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/src/Exceptions/FileNotSpecifiedException.php" />
+        <option value="$PROJECT_DIR$/src/Exceptions/InvalideFileTypeException.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/examples/uploader.html" />
+        <option value="$PROJECT_DIR$/tests/ImageUploader.php" />
+        <option value="$PROJECT_DIR$/src/Exceptions/DirectoryNotFoundException.php" />
+        <option value="$PROJECT_DIR$/src/Exceptions/FileSizeTooLargeException.php" />
+        <option value="$PROJECT_DIR$/src/Exceptions/InvalidFileTypeException.php" />
+        <option value="$PROJECT_DIR$/src/Exceptions/NoOverwritePermissionException.php" />
+        <option value="$PROJECT_DIR$/src/FileUploader.php" />
+        <option value="$PROJECT_DIR$/tests/FileUploaderTest.php" />
+        <option value="$PROJECT_DIR$/examples/uploadImage.php" />
+        <option value="$PROJECT_DIR$/examples/classes/UploaderDecorator.php" />
+        <option value="$PROJECT_DIR$/examples/classes/ImageUploader.php" />
+        <option value="$PROJECT_DIR$/tests/TestUploader.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.6" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1456" />
+    <option name="height" value="886" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FileUploader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FileUploader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FileUploader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FileUploader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FileUploader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="examples" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/vendor/autoload.php" />
+    <property name="recentsLimit" value="5" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.phpunit" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Craig\PhpstormProjects\FileUploader\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="PHPUnit.FileUploaderTest">
+    <configuration default="false" name="FileUploaderTest.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/FileUploader/tests/FileUploaderTest.php">
+      <method />
+    </configuration>
+    <configuration default="false" name="FileUploaderTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="FileUploader\Tests\FileUploaderTest" file="$PROJECT_DIR$/tests/FileUploaderTest.php" scope="Class" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.FileUploaderTest.php" />
+      <item index="1" class="java.lang.String" itemvalue="PHPUnit.FileUploaderTest" />
+    </list>
+    <recent_temporary>
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="PHPUnit.FileUploaderTest" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.FileUploaderTest.php" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bf110a32-9fe0-4606-b899-9d0a4f7d82f9" name="Default" comment="" />
+      <created>1441804178390</created>
+      <option name="number" value="Default" />
+      <updated>1441804178390</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1456" height="886" extended-state="0" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17222223" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33010882" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32648125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16180556" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32889965" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/examples/classes/ImageUploader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+          <folding>
+            <marker date="1441902167400" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441902167400" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/phpunit.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04873646">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/phpunit.xml.dist">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34115523">
+          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6137184">
+          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/files/test.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/phpunit/phpunit/src/Framework/TestCase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.7942238">
+          <caret line="449" column="20" selection-start-line="449" selection-start-column="20" selection-end-line="449" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09764919">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/ImageUploader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5361011">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+          <folding>
+            <marker date="1441900054620" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441900054620" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/Core_c.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5270758">
+          <caret line="255" column="51" selection-start-line="255" selection-start-column="51" selection-end-line="255" selection-end-column="51" />
+          <folding>
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Created by typecasting to object. ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Interface to detect if a class is traversable using &amp;foreach;. ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Interface to create an external Iterator. ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Retrieve an external iterator ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Interface for external iterators or objects that can be iterated ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Return the current element ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Move forward to next element ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Return the key of the current element ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Checks if current position is valid ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Rewind the Iterator to the first element ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Interface to provide accessing objects as arrays. ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Whether a offset exists ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Offset to retrieve ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Offset to set ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Offset to unset ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Interface for customized serializing. ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" String representation of object ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Constructs the object ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Returns message ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Returns Code ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Returns File Name ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Returns Line Number ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Returns Stack Trace ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" @link http://php.net/manual/en/throwable.gettraceasstring.php ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" @link http://php.net/manual/en/throwable.getprevious.php ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" @link http://php.net/manual/en/throwable.tostring.php ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Exception is the base class for ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Clone the exception ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Construct the exception. Note: The message is NOT binary safe. ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Gets the Exception message ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Gets the Exception code ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Gets the file in which the exception occurred ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Gets the line in which the exception occurred ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Gets the stack trace ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Returns previous Exception ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Gets the stack trace as a string ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" String representation of the exception ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" An Error Exception. ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Constructs the exception ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Gets the exception severity ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Class used to represent anonymous functions. ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" This method exists only to disallow instantiation of the Closure class. ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Closure::bindTo � Duplicates the closure with a new bound object and class scope ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" This method is a static version of Closure::bindTo(). ..." />
+            <marker date="1439883336000" expanded="true" signature="-1:-1" placeholder=" Calls the closure with the given parameters and returns the result, with $this bound to the given object $to ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Exceptions/DirectoryNotFoundException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43862817">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <folding>
+            <marker date="1441900800495" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441900800495" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Exceptions/FileSizeTooLargeException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29241878">
+          <caret line="6" column="62" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
+          <folding>
+            <marker date="1441900800495" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441900800495" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Exceptions/NoOverwritePermissionException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34115523">
+          <caret line="7" column="91" selection-start-line="7" selection-start-column="91" selection-end-line="7" selection-end-column="91" />
+          <folding>
+            <marker date="1441900800479" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441900800479" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/File.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66064984">
+          <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+          <folding>
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder=" @param $filename ..." />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder=" @return mixed ..." />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder=" @param $filename ..." />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder=" @return mixed ..." />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder=" @param $size ..." />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder=" @return mixed ..." />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder=" @param $type ..." />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder=" @return mixed ..." />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder=" @param $tmpName ..." />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441883622866" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileUploader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62454873">
+          <caret line="220" column="47" selection-start-line="220" selection-start-column="47" selection-end-line="220" selection-end-column="47" />
+          <folding>
+            <marker date="1441900897133" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Allows file uploads via web form ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Used to set the uploaded file. ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Removes any unsafe characters from the filename. Replaces any spaces with an underscore (_) ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Validates the file against the given rules and uploads the file ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Returns a unique file name for the upload by appending a sequential number. Checks to make sure file doesn't exist before returning a name. ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Validates the upload against the specified options. ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Recursively creates directories for the specified path if they do not exist. ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Returns the path of the uploaded file ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Sets the upload path, second parameter can be passed to create directory if it doesn't exist ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" @param $filename ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Checks that a file with the same name doesn't exist or that it has permission to overwrite ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" checks that the upload directory exists or has permission to be created ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Checks that the file size is not too large ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Checks that the file type is allowed, if none specified then all non-blocked file types will be accepted ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Validate blocked MIME types, this can be used instead of allowed_mime_types, ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Defines whether an uploaded file can overwrite a file with the same name (false by default) ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Returns true if a file can overwrite a file with the same name ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Returns the array of allowed MIME Types ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Accepts an array of allowed MIME Types ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Gets the array of blocked MIME Types ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Accepts an array of mime types to block. ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="  Sets the maximum file size allowed $unit can be B = bytes, KB = Kilobytes, MB = Megabytes ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Defines whether a directory should be created if it doesn't exist ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Returns the value of createDirIfNotExists for directory creation. ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" If set to true this will make sure the file name is unique ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" returns the file details ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder=" Sets the output filename. ..." />
+            <marker date="1441900897133" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Exceptions/InvalidFileTypeException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2913669">
+          <caret line="6" column="60" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
+          <folding>
+            <marker date="1441900800494" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441900800494" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/uploader.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33992806">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="104" />
+          <folding>
+            <marker date="1441898894411" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441898894411" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441898894411" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1441898894411" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441898894411" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441898894411" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441898894411" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/uploadImage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33992806">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <folding>
+            <marker date="1441901263855" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1441901263855" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Contracts/Uploader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327338">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+          <folding>
+            <marker date="1441887868519" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Allows file uploads via web form ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Uploads the file ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Sets the upload path, second parameter can be passed to create directory if it doesn't exist ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Defines whether an uploaded file can overwrite a file with the same name (false by default) ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Returns true if a file can overwrite a file with the same name ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Accepts an array of allowed MIME Types ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Returns the array of allowed MIME Types ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Accepts an array of mime types to block. ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Gets the array of blocked MIME Types ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder="  Sets the maximum file size allowed $unit can be B = bytes, KB = Kilobytes, MB = Megabytes ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Defines whether a directory should be created if it doesn't exist ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Returns the value of createDirIfNotExists for directory creation. ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" If set to true this will make sure the file name is unique ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Used to set the uploaded file. Accepts a php $_FILE request. ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" returns the file details ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Returns the path of the uploaded file ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Returns a unique file name for the upload. ..." />
+            <marker date="1441887868519" expanded="true" signature="-1:-1" placeholder=" Makes the given filename safe for uploading ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/classes/ImageUploader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53417265">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+          <folding>
+            <marker date="1441902167400" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441902167400" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/TestUploader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4856115">
+          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+          <folding>
+            <marker date="1441902167408" expanded="true" signature="-1:-1" placeholder=" Mock class to set some additional variables ..." />
+            <marker date="1441902167408" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1441902167408" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/FileUploaderTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.5593526">
+          <caret line="188" column="122" selection-start-line="188" selection-start-column="122" selection-end-line="188" selection-end-column="122" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

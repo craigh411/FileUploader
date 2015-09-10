@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Uploader</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <div class="panel" style="width:50%;margin:auto;margin-top:50px;border:1px solid #ccc;padding:20px;">
+        <form method="post" action="uploadImage.php" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="Image">Image File:</label>
+                <input type="file" name="image" id="image">
+                <p class="help-block">Please select an image to upload.</p>
+            </div>
+            <input type="submit" value = "Upload Image" class="btn btn-primary">
+        </form>
+    </div>
+</head>
+<body>
+
+</body>
+</html>
