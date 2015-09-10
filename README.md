@@ -12,6 +12,17 @@ A easily configurable file uploader for uploading files via a web form
 - Option to automatically create unique filenames
 - Filename sanitisation
 
+## Installing
+
+The easiest way to install is via Composer:
+
+`composer require craigh/file-uploader`
+
+or you can add `craigh/file-uploader` to your composer.json file and run `composer update`
+
+If you don't use composer then you can of course just clone the repository, download the zip file or copy and paste the code in to your project.
+
+
 ## Usage
 
 The FileUploader accepts a FileUploader\File object. You can easily retrieve an instance by passing the $_FILES['Your_field_name'] variable into the getInstance() method:
@@ -132,6 +143,9 @@ protected $overwrite = false;
 protected $createDirIfNotExists = false;
 ```
 
+## A note on the examples
+
+If you want to run the examples then you will need to change the include path to point to your autoloader or include the FileUploader classes manually.
 
 
 
