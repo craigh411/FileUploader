@@ -4,8 +4,6 @@ use FileUploader\File;
 require_once 'classes/ImageUploader.php';
 try
 {
-	var_dump($_FILES['image']);
-
 	$file = File::getInstance($_FILES['image']);
 	$uploader = new ImageUploader($file);
 	$uploader->setPath('images');
