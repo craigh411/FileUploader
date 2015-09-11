@@ -252,9 +252,23 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	{
 		$this->uploader->setMaxFileSize(10000, 'B');
 		$this->assertEquals(10000, $this->uploader->getMaxFileSize());
+		$this->uploader->setMaxFileSize(10000, 'BYTE');
+		$this->assertEquals(10000, $this->uploader->getMaxFileSize());
+		$this->uploader->setMaxFileSize(10000, 'BYTES');
+		$this->assertEquals(10000, $this->uploader->getMaxFileSize());
 		$this->uploader->setMaxFileSize(100, 'KB');
 		$this->assertEquals(1e+5, $this->uploader->getMaxFileSize());
+		$this->uploader->setMaxFileSize(100, 'KILOBYTE');
+		$this->assertEquals(1e+5, $this->uploader->getMaxFileSize());
+		$this->uploader->setMaxFileSize(100, 'KILOBYTES');
+		$this->assertEquals(1e+5, $this->uploader->getMaxFileSize());
+		$this->uploader->setMaxFileSize(1, 'MEGABYTE');
+		$this->assertEquals(1e+6, $this->uploader->getMaxFileSize());
+		$this->uploader->setMaxFileSize(1, 'MEGABYTES');
+		$this->assertEquals(1e+6, $this->uploader->getMaxFileSize());
 		$this->uploader->setMaxFileSize(1, 'MB');
+		$this->assertEquals(1e+6, $this->uploader->getMaxFileSize());
+		$this->uploader->setMaxFileSize(1, 'megabyte');
 		$this->assertEquals(1e+6, $this->uploader->getMaxFileSize());
 	}
 

@@ -60,7 +60,6 @@ class FileUploader implements Uploader {
 		$filename = preg_replace('/[^a-z1-9\.\-\_]/i', '', $filename);
 		// removes any dots except the last one.
 		$filename = preg_replace('/\.(?=.*?\.)/', '', $filename);
-		//$filename = strtolower($filename);
 		$this->filename = $filename;
 	}
 
@@ -163,7 +162,6 @@ class FileUploader implements Uploader {
 	{
 		return is_file($this->path . $filename . "." . $extension);
 	}
-
 
 	/**
 	 * Checks that a file with the same name doesn't exist or that it has permission to overwrite
@@ -307,27 +305,21 @@ class FileUploader implements Uploader {
 		{
 			throw new Exception("Invalid file size: expects integer");
 		}
-		if($unit === "B")
+		if($unit === "B" || preg_match("/^BYTE(S)?$/", $unit))
 		{
 			$this->maxFileSize = $size;
 		}
+		elseif($unit === "KB" || preg_match("/^KILOBYTE(S)?$/", $unit))
+		{
+			$this->maxFileSize = ($size * 1000);
+		}
+		elseif($unit === "MB" || preg_match("/^MEGABYTE(S)?$/", $unit))
+		{
+			$this->maxFileSize = ($size * 1000000);
+		}
 		else
 		{
-			if($unit === "KB")
-			{
-				$this->maxFileSize = ($size * 1000);
-			}
-			else
-			{
-				if($unit === "MB")
-				{
-					$this->maxFileSize = ($size * 1000000);
-				}
-				else
-				{
-					throw new Exception("Invalid unit in setMaxFileSize: Expects 'B', 'KB' or 'MB'. ");
-				}
-			}
+			throw new Exception("Invalid unit in setMaxFileSize: Expects 'B', 'KB' or 'MB'.");
 		}
 	}
 
@@ -336,7 +328,8 @@ class FileUploader implements Uploader {
 	 * @param bool $createDir
 	 * @return void
 	 */
-	public function createDirIfNotExists($createDir)
+	public
+	function createDirIfNotExists($createDir)
 	{
 		$this->createDirIfNotExists = $createDir;
 	}
@@ -345,7 +338,8 @@ class FileUploader implements Uploader {
 	 * Returns the value of createDirIfNotExists for directory creation.
 	 * @return bool
 	 */
-	public function canCreateDirIfNotExists()
+	public
+	function canCreateDirIfNotExists()
 	{
 		return $this->createDirIfNotExists;
 	}
@@ -355,25 +349,30 @@ class FileUploader implements Uploader {
 	 * @param bool $makeUnique
 	 * @return void
 	 */
-	public function makeFilenameUnique($makeUnique)
+	public
+	function makeFilenameUnique($makeUnique)
 	{
 		$this->makeFilenameUnique = $makeUnique;
 	}
 
-	public function getMakeFilenameUnique()
+	public
+	function getMakeFilenameUnique()
 	{
 		return $this->makeFilenameUnique;
 	}
+
 	/**
 	 * returns the file details
 	 * @return \FileUploader\File
 	 */
-	public function getFile()
+	public
+	function getFile()
 	{
 		return new File($this->filename, $this->fileSize, $this->fileType, $this->tmpName);
 	}
 
-	public function getFilename()
+	public
+	function getFilename()
 	{
 		return $this->filename;
 	}
@@ -383,7 +382,8 @@ class FileUploader implements Uploader {
 	 * A second boolean parameter can be passed if you do not want to make the filename safe.
 	 * @param $filename
 	 */
-	public function setFilename($filename)
+	public
+	function setFilename($filename)
 	{
 		$this->filename = $filename;
 	}
