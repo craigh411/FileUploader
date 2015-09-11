@@ -42,7 +42,7 @@ You can then upload the file as follows:
 ##### setPath(string)
 Sets the upload path. This can also be set via the second parameter on the constructor (defaults to current directory)
 
-`$uploader->setPath('path\to\dir');`
+`$uploader->setPath('path/to/dir');`
 
 ##### overwrite(boolean)
 Set to true to allow overwriting of files with the same name (default: false)
@@ -51,9 +51,9 @@ Set to true to allow overwriting of files with the same name (default: false)
 
 ##### setAllowedMimeTypes(array) 
 Pass in an array of allowed mime types, everything else will be blocked. When empty all file types will be allowed unless
-explicitely blocked.
+explicitly blocked.
 
-`$uploader->setAllowedMimeTypes(['image\jpeg,'image\png', 'image\gif']);`
+`$uploader->setAllowedMimeTypes(['image/jpeg,'image/png', 'image/gif']);`
 
 ##### setBlockedMimeTypes(array)
 You can also block file types if you prefer. Pass in an array of mime types you want to block
