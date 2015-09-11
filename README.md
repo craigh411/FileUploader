@@ -89,8 +89,8 @@ makeFilenameSafe() method
 
 ##### makeFilenameSafe()
 Sanitises the given filename by removing any dangerous characters and replaces any spaces with an underscore. You will only need to call this if you want to set your
-own filenames using the setFilename() method. This method is called automatically if you do not want to set your own filename
-You should also be aware that this call will beed to be made after you set your filename:
+own filenames using the setFilename() method, otherwise this method is called automatically.
+You should also be aware that this call will need to be made after you set your filename:
 
 ```
 $uploader->setFilename('my%$crazy@filename.txt');
