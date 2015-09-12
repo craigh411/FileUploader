@@ -317,7 +317,7 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function it_chains_options_together_and_returns_the_upload_path()
 	{
-		$upload = $this->uploader->setFilename('test.txt')
+		$upload = (new FileUploader($this->getFile()))
 			->setPath('files/')
 			->setAllowedMimeTypes(['text/plain'])
 			->overwrite(false)

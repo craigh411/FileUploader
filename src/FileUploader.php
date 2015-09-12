@@ -32,6 +32,8 @@ class FileUploader implements Uploader{
 	{
 		$this->setPath($path);
 		$this->setFile($file);
+
+		return $this;
 	}
 
 	/**
