@@ -69,6 +69,10 @@ The maximum file size you want to allow, expects size to be a number and unit to
 
 `$uploader->setMaxFileSize(5, 'MB');`
 
+You can also use the words BYTE, BYTES, KILOBYTE, KILOBYTES, MEGABYTE or MEGABYTES if you prefer:
+
+`$uploader->setMaxFileSize(1, 'MEGABYTE');`
+
 #####createDirIfNotExists(bool)
 If set to true this will recursively create any specified directories if they do not exist (default: false)
 
@@ -98,9 +102,34 @@ $uploader->makeFilenameSafe();
 ```
 
 ##### uploadFile() 
-Uploads the file
+Uploads the file and returns the upload path.
 
-`$uploader->uploadFile();`
+`$uploadPath = $uploader->uploadFile();`
+
+## Chaining
+
+All methods above can be applied in a chain for a clean syntax:
+
+```
+use FileUploader\File;
+use FileUploader\FileUploader;
+
+$file = File::getInstance($_FILE['file']);
+$uploader = new FileUploader($file);
+$uploader->setPath->('files')->overwrite(true)->uploadFile();
+
+```
+
+or even
+
+```
+use FileUploader\File;
+use FileUploader\FileUploader;
+
+$file = File::getInstance($_FILE['file']);
+$uploader = (new FileUploader($file))->uploadFile();
+
+```
 
 ## Config by Extending the FileUploader Class
 
@@ -108,6 +137,7 @@ For a cleaner way to configure you uploads you can extend the FileUploader class
 variables, e.g.:
 
 ```
+use FileUploader\FileUploader;
 
 class ImageUploader extends FileUploader{
 
@@ -126,6 +156,8 @@ class ImageUploader extends FileUploader{
 This can then be used as follows:
 
 ```
+use FileUploader\File;
+
 $image = File::getInstance($_FILE['image']);
 $uploader = new ImageUploader($image);
 $image->uploadFile();
