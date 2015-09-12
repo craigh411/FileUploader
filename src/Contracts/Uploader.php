@@ -7,30 +7,54 @@ use FileUploader\File;
 /**
  * Allows file uploads via web form
  *
- * Class FileUploader
- * @package FileUploader
+ * Class Uploader
+ * @package Uploader
  */
 interface Uploader {
 
 	/**
-	 * Uploads the file
+	 * Used to set the uploaded file.
+	 * @param $file
+	 * @return Uploader
+	 */
+	public function setFile(File $file);
+
+	/**
+	 * Removes any unsafe characters from the filename. Replaces any spaces with an underscore (_)
+	 * @return Uploader
+	 */
+	public function makeFilenameSafe();
+
+	/**
+	 * Validates the file against the given rules and uploads the file
 	 * @throws Exception
 	 * @return String
 	 */
 	public function uploadFile();
 
 	/**
+	 * Returns a unique file name for the upload by appending a sequential number. Checks to make sure file doesn't exist before returning a name.
+	 * @return String
+	 */
+	public function createUniqueFilename();
+
+	/**
+	 * Returns the path of the uploaded file
+	 * @return String
+	 */
+	public function getPath();
+
+	/**
 	 * Sets the upload path, second parameter can be passed to create directory if it doesn't exist
 	 * @param string $path
-	 * @param bool $createDirIfNotExists
-	 * @return void
+	 * @return Uploader
 	 */
 	public function setPath($path);
 
 	/**
 	 * Defines whether an uploaded file can overwrite a file with the same name (false by default)
 	 * @param bool $overwrite
-	 * @return void
+	 * @return Uploader
 	 */
 	public function overwrite($overwrite);
 
@@ -41,25 +65,17 @@ interface Uploader {
 	public function canOverwrite();
 
 	/**
-	 * Accepts an array of allowed MIME Types
-	 * @param array $allowedMimeTypes
-	 * @return void
-	 */
-	public function setAllowedMimeTypes($allowedMimeTypes);
-
-	/**
 	 * Returns the array of allowed MIME Types
 	 * @return array
 	 */
 	public function getAllowedMimeTypes();
 
 	/**
-	 * Accepts an array of mime types to block.
-	 * Blocking occurs after allowing, so blocked types will take precedence if they appear in both lists.
-	 * @param array $blockedMimeTypes
-	 * @return void
+	 * Accepts an array of allowed MIME Types
+	 * @param array $allowedMimeTypes
+	 * @return Uploader
 	 */
-	public function setBlockedMimeTypes($blockedMimeTypes);
+	public function setAllowedMimeTypes($allowedMimeTypes);
 
 	/**
 	 * Gets the array of blocked MIME Types
@@ -68,20 +84,33 @@ interface Uploader {
 	public function getBlockedMimeTypes();
 
 	/**
-	 *  Sets the maximum file size allowed $unit can be B = bytes, KB = Kilobytes, MB = Megabytes
-	 * @param int $size
-	 * @param string $unit
-	 * @throws Exception
-	 * @return void
+	 * Accepts an array of mime types to block.
+	 * Blocking occurs after allowing, so blocked types will take precedence if they appear in both lists.
+	 * @param array $blockedMimeTypes
+	 * @return Uploader
 	 */
-	public function setMaxFileSize($size, $unit);
+	public function setBlockedMimeTypes($blockedMimeTypes);
 
+	/**
+	 * Returns the maximum file size allowed
+	 * @return number
+	 */
 	public function getMaxFileSize();
 
 	/**
-	 * Defines whether a directory should be created if it doesn't exist
+	 *  Sets the maximum file size allowed $unit can be B = bytes, KB = Kilobytes, MB = Megabytes
+	 * or the words themselves
+	 * @param int $size
+	 * @param string $unit
+	 * @throws Exception
+	 * @return Uploader
+	 */
+	public function setMaxFileSize($size, $unit = "B");
+
+	/**
+	 * Defines whether a directory should be created if it doesn't exist.
 	 * @param bool $createDir
-	 * @return void
+	 * @return Uploader
 	 */
 	public function createDirIfNotExists($createDir);
 
@@ -94,45 +123,33 @@ interface Uploader {
 	/**
 	 * If set to true this will make sure the file name is unique
 	 * @param bool $makeUnique
-	 * @return void
+	 * @return Uploader
 	 */
 	public function makeFilenameUnique($makeUnique);
 
-	public function getMakeFileNameUnique();
-
-
 	/**
-	 * Used to set the uploaded file. Accepts a php $_FILE request.
-	 * @param $file
-	 * @return void
+	 * Returns the value of $makeFilenameUnique
+	 * @return bool
 	 */
-	public function setFile(File $file);
+	public function getMakeFilenameUnique();
 
 	/**
 	 * returns the file details
-	 * @return array
+	 * @return File
 	 */
 	public function getFile();
 
-	public function setFilename($filename);
-
+	/**
+	 * Returns the filename
+	 * @return string
+	 */
 	public function getFilename();
 
 	/**
-	 * Returns the path of the uploaded file
-	 * @return String
+	 * Sets the output filename.
+	 * A second boolean parameter can be passed if you do not want to make the filename safe.
+	 * @param $filename
+	 * @return Uploader
 	 */
-	public function getPath();
-
-	/**
-	 * Returns a unique file name for the upload.
-	 * @return String
-	 */
-	public function createUniqueFilename();
-
-	/**
-	 * Makes the given filename safe for uploading
-	 * @return string
-	 */
-	public function makeFilenameSafe();
+	public function setFilename($filename);
 }

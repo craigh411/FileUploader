@@ -14,7 +14,7 @@ use FileUploader\Exceptions\NoOverwritePermissionException;
  * Class FileUploader
  * @package FileUploader
  */
-class FileUploader implements Uploader {
+class FileUploader implements Uploader{
 
 	private $path;
 	private $filename;
@@ -37,7 +37,7 @@ class FileUploader implements Uploader {
 	/**
 	 * Used to set the uploaded file.
 	 * @param $file
-	 * @return void
+	 * @return FileUploader
 	 */
 	public function setFile(File $file)
 	{
@@ -46,11 +46,13 @@ class FileUploader implements Uploader {
 		$this->fileType = $file->getType();
 		$this->tmpName = $file->getTmpName();
 		$this->makeFilenameSafe();
+
+		return $this;
 	}
 
 	/**
 	 * Removes any unsafe characters from the filename. Replaces any spaces with an underscore (_)
-	 * @return void
+	 * @return FileUploader
 	 */
 	public function makeFilenameSafe()
 	{
@@ -61,6 +63,8 @@ class FileUploader implements Uploader {
 		// removes any dots except the last one.
 		$filename = preg_replace('/\.(?=.*?\.)/', '', $filename);
 		$this->filename = $filename;
+
+		return $this;
 	}
 
 	/**
@@ -73,7 +77,7 @@ class FileUploader implements Uploader {
 		// Make sure the filename is unique if makeFilenameUnique is set to true
 		if($this->makeFilenameUnique)
 		{
-			$this->filename = $this->createUniqueFilename();
+			$this->createUniqueFilename();
 		}
 		if($this->_validate())
 		{
@@ -98,14 +102,18 @@ class FileUploader implements Uploader {
 			$filename = $filename . "_" . $increment;
 			$increment++;
 		}
+		$this->filename = $filename . '.' . $extension;
 
-		return $filename . '.' . $extension;
+		return $this;
 	}
 
 	/**
 	 * Validates the upload against the specified options.
-	 * @throws Exception
 	 * @return bool
+	 * @throws DirectoryNotFoundException
+	 * @throws FileSizeTooLargeException
+	 * @throws InvalidFileTypeException
+	 * @throws NoOverwritePermissionException
 	 */
 	private function _validate()
 	{
@@ -142,7 +150,7 @@ class FileUploader implements Uploader {
 	/**
 	 * Sets the upload path, second parameter can be passed to create directory if it doesn't exist
 	 * @param string $path
-	 * @return void
+	 * @return FileUploader
 	 */
 	public function setPath($path)
 	{
@@ -151,9 +159,12 @@ class FileUploader implements Uploader {
 		{
 			$this->path .= "/";
 		}
+
+		return $this;
 	}
 
 	/**
+	 * Checks whether the specified file exists.
 	 * @param $filename
 	 * @param $extension
 	 * @return bool
@@ -176,7 +187,7 @@ class FileUploader implements Uploader {
 	}
 
 	/**
-	 * checks that the upload directory exists or has permission to be created
+	 * Checks that the upload directory exists or has permission to be created
 	 * @throws DirectoryNotFoundException
 	 */
 	private function checkHasValidUploadDirectory()
@@ -231,11 +242,13 @@ class FileUploader implements Uploader {
 	/**
 	 * Defines whether an uploaded file can overwrite a file with the same name (false by default)
 	 * @param bool $overwrite
-	 * @return void
+	 * @return FileUploader
 	 */
 	public function overwrite($overwrite)
 	{
 		$this->overwrite = $overwrite;
+
+		return $this;
 	}
 
 	/**
@@ -259,11 +272,13 @@ class FileUploader implements Uploader {
 	/**
 	 * Accepts an array of allowed MIME Types
 	 * @param array $allowedMimeTypes
-	 * @return void
+	 * @return FileUploader
 	 */
 	public function setAllowedMimeTypes($allowedMimeTypes)
 	{
 		$this->allowedMimeTypes = $allowedMimeTypes;
+
+		return $this;
 	}
 
 	/**
@@ -279,13 +294,19 @@ class FileUploader implements Uploader {
 	 * Accepts an array of mime types to block.
 	 * Blocking occurs after allowing, so blocked types will take precedence if they appear in both lists.
 	 * @param array $blockedMimeTypes
-	 * @return void
+	 * @return FileUploader
 	 */
 	public function setBlockedMimeTypes($blockedMimeTypes)
 	{
 		$this->blockedMimeTypes = $blockedMimeTypes;
+
+		return $this;
 	}
 
+	/**
+	 * Returns the maximum filesize allowed
+	 * @return number
+	 */
 	public function getMaxFileSize()
 	{
 		return $this->maxFileSize;
@@ -293,10 +314,11 @@ class FileUploader implements Uploader {
 
 	/**
 	 *  Sets the maximum file size allowed $unit can be B = bytes, KB = Kilobytes, MB = Megabytes
+	 * or the words themselves
 	 * @param int $size
 	 * @param string $unit
 	 * @throws Exception
-	 * @return void
+	 * @return FileUploader
 	 */
 	public function setMaxFileSize($size, $unit = "B")
 	{
@@ -321,25 +343,27 @@ class FileUploader implements Uploader {
 		{
 			throw new Exception("Invalid unit in setMaxFileSize: Expects 'B', 'KB' or 'MB'.");
 		}
+
+		return $this;
 	}
 
 	/**
-	 * Defines whether a directory should be created if it doesn't exist
+	 * Defines whether a directory should be created if it doesn't exist.
 	 * @param bool $createDir
-	 * @return void
+	 * @return FileUploader
 	 */
-	public
-	function createDirIfNotExists($createDir)
+	public function createDirIfNotExists($createDir)
 	{
 		$this->createDirIfNotExists = $createDir;
+
+		return $this;
 	}
 
 	/**
 	 * Returns the value of createDirIfNotExists for directory creation.
 	 * @return bool
 	 */
-	public
-	function canCreateDirIfNotExists()
+	public function canCreateDirIfNotExists()
 	{
 		return $this->createDirIfNotExists;
 	}
@@ -347,16 +371,20 @@ class FileUploader implements Uploader {
 	/**
 	 * If set to true this will make sure the file name is unique
 	 * @param bool $makeUnique
-	 * @return void
+	 * @return FileUploader
 	 */
-	public
-	function makeFilenameUnique($makeUnique)
+	public function makeFilenameUnique($makeUnique)
 	{
 		$this->makeFilenameUnique = $makeUnique;
+
+		return $this;
 	}
 
-	public
-	function getMakeFilenameUnique()
+	/**
+	 * Returns the value of $makeFilenameUnique
+	 * @return bool
+	 */
+	public function getMakeFilenameUnique()
 	{
 		return $this->makeFilenameUnique;
 	}
@@ -365,14 +393,16 @@ class FileUploader implements Uploader {
 	 * returns the file details
 	 * @return \FileUploader\File
 	 */
-	public
-	function getFile()
+	public function getFile()
 	{
 		return new File($this->filename, $this->fileSize, $this->fileType, $this->tmpName);
 	}
 
-	public
-	function getFilename()
+	/**
+	 * Returns the filename
+	 * @return string
+	 */
+	public function getFilename()
 	{
 		return $this->filename;
 	}
@@ -381,10 +411,12 @@ class FileUploader implements Uploader {
 	 * Sets the output filename.
 	 * A second boolean parameter can be passed if you do not want to make the filename safe.
 	 * @param $filename
+	 * @return FileUploader
 	 */
-	public
-	function setFilename($filename)
+	public function setFilename($filename)
 	{
 		$this->filename = $filename;
+
+		return $this;
 	}
 }

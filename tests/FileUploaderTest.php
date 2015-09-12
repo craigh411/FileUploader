@@ -308,7 +308,21 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 		$this->uploader->setFilename(rand() . '.txt');
 		$this->uploader->setPath('files/');
 		$this->uploader->setBlockedMimeTypes(['text/plain']);
-		$this->uploader->setAllowedMimeTypes(['text/plain','image/jpeg']);
+		$this->uploader->setAllowedMimeTypes(['text/plain', 'image/jpeg']);
 		$this->uploader->uploadFile();
+	}
+
+	/**
+	 * @test
+	 */
+	public function it_chains_options_together_and_returns_the_upload_path()
+	{
+		$upload = $this->uploader->setFilename('test.txt')
+			->setPath('files/')
+			->setAllowedMimeTypes(['text/plain'])
+			->overwrite(false)
+			->makeFilenameUnique(true)
+			->uploadFile();
+		$this->assertEquals('files/test_1.txt', $upload);
 	}
 }

@@ -6,8 +6,7 @@ try
 {
 	$file = File::getInstance($_FILES['image']);
 	$uploader = new ImageUploader($file);
-	$uploader->setPath('images');
-	$upload = $uploader->uploadFile();
+	$upload = $uploader->setPath('images')->uploadFile();
 
 } catch(Exception $e)
 {
