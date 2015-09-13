@@ -21,12 +21,12 @@ The easiest way to install is via Composer:
 or you can add `craigh/file-uploader` to your composer.json file and run `composer update`
 
 
-**Note:**The FileUploader requires symfony/HttpFoundation, so if you are not using composer you will need to
+**Note:** The FileUploader requires [`symfony/HttpFoundation`](https://github.com/symfony/HttpFoundation), so if you are not using composer you will need to
 make sure you have this library in your include path.
 
 ## Usage
 
-The FileUploader requires a 'Symfony\Component\HttpFoundation\File\UploadedFile' object. You can easily retrieve an instance by passing the $_FILES['Your_field_name'] variable into the getUploadedFile() method
+The FileUploader requires a `Symfony\Component\HttpFoundation\File\UploadedFile` object. You can easily retrieve an instance by passing the $_FILES['Your_field_name'] variable into the getUploadedFile() method
 on the FileUploader\File class:
 
 `$file = FileUploader\File::getUploadedFile($_FILES['file']);`
@@ -119,7 +119,7 @@ All methods above can be applied in a chain for a clean syntax:
 use FileUploader\File;
 use FileUploader\FileUploader;
 
-$file = File::getInstance($_FILE['file']);
+$file = File::getUploadedFile($_FILE['file']);
 $uploader = new FileUploader($file);
 $uploader->uploadPath->('files')->overwrite(true)->upload();
 ```
@@ -130,7 +130,7 @@ or even
 use FileUploader\File;
 use FileUploader\FileUploader;
 
-$file = File::getInstance($_FILE['file']);
+$file = File::getUploadedFile($_FILE['file']);
 $uploader = (new FileUploader($file))->upload();
 ```
 
