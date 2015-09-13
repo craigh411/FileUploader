@@ -4,6 +4,7 @@ namespace FileUploader\Tests;
 use FileUploader\File;
 use FileUploader\FileUploader;
 use PHPUnit_Framework_TestCase;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploaderTest extends PHPUnit_Framework_TestCase {
 
@@ -14,12 +15,18 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 
 	protected function setUp()
 	{
+		$handle = fopen('tmp/tmp.txt','w+');
+		fwrite($handle,'');
+		fclose($handle);
+
 		$this->uploader = new FileUploader($this->getFile());
 	}
 
-	protected function getFile()
+
+	protected function getFile($tmp = 'tmp/tmp.txt', $file = 'test.txt')
 	{
-		return new File('test.txt', 100, 'text/plain', 'tmp_name');
+		// return an UploadedFile object in test mode
+		return new UploadedFile($tmp, $file, null, null, null, true);
 	}
 
 	/**
@@ -27,9 +34,10 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function it_sets_the_name_of_the_file_to_be_uploaded()
 	{
-		$file = new File('testFile.jpg', 100, 'image/jpeg', 'tmp_name');
-		$this->uploader->setFile($file);
-		$this->assertEquals('testFile.jpg', $this->uploader->getFile()->getFilename());
+		//$file = new File('testFile.jpg', 100, 'image/jpeg', 'tmp_name');
+		$file = $this->getFile();
+		$this->uploader->file($file);
+		$this->assertEquals('test.txt', $this->uploader->getFile()->getClientOriginalName());
 	}
 
 	/**
@@ -37,9 +45,10 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function it_sets_the_size_of_the_file_to_be_uploaded()
 	{
-		$file = new File('testFile.jpg', 20000, 'images/jpeg', 'tmp_name');
-		$this->uploader->setFile($file);
-		$this->assertEquals(20000, $this->uploader->getFile()->getSize());
+		//$file = new File('testFile.jpg', 20000, 'images/jpeg', 'tmp_name');
+		$file = $this->getFile();
+		$this->uploader->file($file);
+		$this->assertEquals(0, $this->uploader->getFile()->getSize());
 	}
 
 	/**
@@ -47,9 +56,10 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function it_sets_the_mime_type_of_the_file_to_be_uploaded()
 	{
-		$file = new File('testFile.jpg', '2MB', 'image/png', 'tmp_name');
-		$this->uploader->setFile($file);
-		$this->assertEquals('image/png', $this->uploader->getFile()->getType());
+		//$file = new File('testFile.jpg', '2MB', 'image/png', 'tmp_name');
+		$file = $this->getFile();
+		$this->uploader->file($file);
+		$this->assertEquals('file', $this->uploader->getFile()->getType());
 	}
 
 	/**
@@ -57,19 +67,20 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function it_sets_the_tmp_name_of_the_file_to_be_uploaded()
 	{
-		$file = new File('testFile.jpg', '2MB', 'image/png', 'tmp_name_test');
-		$this->uploader->setFile($file);
-		$this->assertEquals('tmp_name_test', $this->uploader->getFile()->getTmpName());
+		//$file = new File('testFile.jpg', '2MB', 'image/png', 'tmp_name_test');
+		$file = $this->getFile();
+		$this->uploader->file($file);
+		$this->assertEquals('tmp', $this->uploader->getFile()->getPath());
 	}
 
 	/**
 	 * @test
 	 */
-	public function it_returns_an_instance_of_file()
+	public function it_returns_an_instance_of_UploadedFile()
 	{
-		$uploadedFile = ['name' => '', 'type' => '', 'size' => '', 'tmp_name' => ''];
-		$file = File::getInstance($uploadedFile);
-		$this->assertInstanceOf('FileUploader\File', $file);
+		$uploadedFile = ['name' => 'test.txt', 'type' => 'file', 'size' => '0', 'tmp_name' => 'tmp/tmp.txt'];
+		$file = File::getUploadedFile($uploadedFile);
+		$this->assertInstanceOf('Symfony\Component\HttpFoundation\File\UploadedFile', $file);
 	}
 
 	/**
@@ -78,8 +89,8 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_replaces_spaces_with_underscores()
 	{
 		$filename = 'my test txt file.txt';
-		$this->uploader->setFilename($filename);
-		$this->uploader->makeFilenameSafe();
+		$this->uploader->filename($filename);
+		$this->uploader->sanitizeFilename();
 		$this->assertEquals('my_test_txt_file.txt', $this->uploader->getFilename());
 	}
 
@@ -89,8 +100,8 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_removes_all_non_safe_characters()
 	{
 		$filename = 'my $&?test_txt.\@*" file 1.txt';
-		$this->uploader->setFilename($filename);
-		$this->uploader->makeFilenameSafe();
+		$this->uploader->filename($filename);
+		$this->uploader->sanitizeFilename();
 		$this->assertEquals('my_test_txt_file_1.txt', $this->uploader->getFilename());
 	}
 
@@ -100,8 +111,8 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_removes_all_dots_except_the_one_for_the_extension()
 	{
 		$filename = 'my... test_txt. file. 1..txt';
-		$this->uploader->setFilename($filename);
-		$this->uploader->makeFilenameSafe();
+		$this->uploader->filename($filename);
+		$this->uploader->sanitizeFilename();
 		$this->assertEquals('my_test_txt_file_1.txt', $this->uploader->getFilename());
 	}
 
@@ -111,7 +122,7 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_sets_allowed_file_types()
 	{
 		$allow = ['image/jpg', 'image/png'];
-		$this->uploader->setAllowedMimeTypes($allow);
+		$this->uploader->allowedMimeTypes($allow);
 		$allowed = $this->uploader->getAllowedMimeTypes();
 		$this->assertEquals('image/jpg', $allowed[0]);
 		$this->assertEquals('image/png', $allowed[1]);
@@ -138,7 +149,7 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 		$maxFileSize = $uploader->getMaxFileSize();
 		$makeFilenameUnique = $uploader->getMakeFilenameUnique();
 		$overwrite = $uploader->canOverwrite();
-		$createDirIfNotExists = $uploader->canCreateDirIfNotExists();
+		$createDirIfNotExists = $uploader->canCreateDirs();
 		$blockedMimeTypes = $uploader->getBlockedMimeTypes();
 		$this->assertEquals(10, $maxFileSize);
 		$this->assertTrue($makeFilenameUnique);
@@ -153,9 +164,9 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_throws_NoOverwritePermissionException_on_upload()
 	{
 		$this->setExpectedException('FileUploader\Exceptions\NoOverwritePermissionException');
-		$this->uploader->setFilename('test.txt');
-		$this->uploader->setPath('files/');
-		$this->uploader->uploadFile();
+		$this->uploader->filename('test.txt');
+		$this->uploader->uploadPath('files/');
+		$this->uploader->upload();
 	}
 
 	/**
@@ -164,9 +175,9 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_throws_DirectoryNotFoundException_on_upload()
 	{
 		$this->setExpectedException('FileUploader\Exceptions\DirectoryNotFoundException');
-		$this->uploader->setFilename('test.txt');
-		$this->uploader->setPath('files/' . rand() . '/');
-		$this->uploader->uploadFile();
+		$this->uploader->filename('test.txt');
+		$this->uploader->uploadPath('files/' . rand() . '/');
+		$this->uploader->upload();
 	}
 
 	/**
@@ -175,10 +186,10 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_throws_FileSizeTooLargeException_on_upload()
 	{
 		$this->setExpectedException('FileUploader\Exceptions\FileSizeTooLargeException');
-		$this->uploader->setFilename(rand() . '.txt');
-		$this->uploader->setPath('files/');
-		$this->uploader->setMaxFileSize(1);
-		$this->uploader->uploadFile();
+		$uploader = new FileUploader($this->getFile('tmp/large_tmp.txt', 'large_test.txt'));
+		$uploader->uploadPath('files/');
+		$uploader->maxFileSize(1);
+		$uploader->upload();
 	}
 
 	/**
@@ -186,11 +197,11 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function it_throws_a_not_allowed_InvalidFileTypeException_on_upload()
 	{
-		$this->setExpectedException('FileUploader\Exceptions\InvalidFileTypeException', "Invalid File Type: text/plain has not been allowed");
-		$this->uploader->setFilename(rand() . '.txt');
-		$this->uploader->setPath('files/');
-		$this->uploader->setAllowedMimeTypes(['image/jpeg']);
-		$this->uploader->uploadFile();
+		$this->setExpectedException('FileUploader\Exceptions\InvalidFileTypeException', "Invalid File Type: inode/x-empty has not been allowed");
+		$this->uploader->filename(rand() . '.txt');
+		$this->uploader->uploadPath('files/');
+		$this->uploader->allowedMimeTypes(['image/jpeg']);
+		$this->uploader->upload();
 	}
 
 	/**
@@ -198,24 +209,13 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function it_throws_a_blocked_allowed_InvalidFileTypeException_on_upload()
 	{
-		$this->setExpectedException('FileUploader\Exceptions\InvalidFileTypeException', "Invalid File Type: text/plain type has been blocked");
-		$this->uploader->setFilename(rand() . '.txt');
-		$this->uploader->setPath('files/');
-		$this->uploader->setBlockedMimeTypes(['text/plain']);
-		$this->uploader->uploadFile();
+		$this->setExpectedException('FileUploader\Exceptions\InvalidFileTypeException', "Invalid File Type: inode/x-empty type has been blocked");
+		$this->uploader->filename(rand() . '.txt');
+		$this->uploader->uploadPath('files/');
+		$this->uploader->blockedMimeTypes(['inode/x-empty']);
+		$this->uploader->upload();
 	}
 
-	/**
-	 * @test
-	 */
-	public function it_validates_the_upload()
-	{
-		$file = rand() . '.txt';
-		$this->uploader->setFilename($file);
-		$this->uploader->setPath('files/');
-		$this->uploader->setAllowedMimeTypes(['text/plain']);
-		$this->assertEquals('files/' . $file, $this->uploader->uploadFile());
-	}
 
 	/**
 	 * @test
@@ -223,12 +223,13 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_creates_a_new_upload_directory()
 	{
 		$file = 'file.txt';
-		$this->uploader->setFilename($file);
-		$this->uploader->setPath('files/new');
-		$this->uploader->createDirIfNotExists(true);
-		$this->uploader->setAllowedMimeTypes(['text/plain']);
-		$this->uploader->uploadFile();
+		$this->uploader->filename($file);
+		$this->uploader->uploadPath('files/new');
+		$this->uploader->createDirs(true);
+		$this->uploader->allowedMimeTypes(['inode/x-empty']);
+		$this->uploader->upload();
 		$this->assertTrue(is_dir('files/new'));
+		unlink('files/new/file.txt');
 		rmdir('files/new');
 	}
 
@@ -238,11 +239,12 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_creates_a_unique_filename_for_upload()
 	{
 		$file = 'test.txt';
-		$this->uploader->setFilename($file);
-		$this->uploader->setPath('files');
+		$this->uploader->filename($file);
+		$this->uploader->uploadPath('files');
 		$this->uploader->makeFilenameUnique(true);
-		$this->uploader->setAllowedMimeTypes(['text/plain']);
-		$this->assertEquals('files/test_1.txt', $this->uploader->uploadFile());
+		$this->uploader->allowedMimeTypes(['inode/x-empty']);
+		$this->assertEquals('files/test_1.txt', $this->uploader->upload());
+		unlink('files/test_1.txt');
 	}
 
 	/**
@@ -250,25 +252,25 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function it_sets_valid_max_file_sizes()
 	{
-		$this->uploader->setMaxFileSize(10000, 'B');
+		$this->uploader->maxFileSize(10000, 'B');
 		$this->assertEquals(10000, $this->uploader->getMaxFileSize());
-		$this->uploader->setMaxFileSize(10000, 'BYTE');
+		$this->uploader->maxFileSize(10000, 'BYTE');
 		$this->assertEquals(10000, $this->uploader->getMaxFileSize());
-		$this->uploader->setMaxFileSize(10000, 'BYTES');
+		$this->uploader->maxFileSize(10000, 'BYTES');
 		$this->assertEquals(10000, $this->uploader->getMaxFileSize());
-		$this->uploader->setMaxFileSize(100, 'KB');
+		$this->uploader->maxFileSize(100, 'KB');
 		$this->assertEquals(1e+5, $this->uploader->getMaxFileSize());
-		$this->uploader->setMaxFileSize(100, 'KILOBYTE');
+		$this->uploader->maxFileSize(100, 'KILOBYTE');
 		$this->assertEquals(1e+5, $this->uploader->getMaxFileSize());
-		$this->uploader->setMaxFileSize(100, 'KILOBYTES');
+		$this->uploader->maxFileSize(100, 'KILOBYTES');
 		$this->assertEquals(1e+5, $this->uploader->getMaxFileSize());
-		$this->uploader->setMaxFileSize(1, 'MEGABYTE');
+		$this->uploader->maxFileSize(1, 'MEGABYTE');
 		$this->assertEquals(1e+6, $this->uploader->getMaxFileSize());
-		$this->uploader->setMaxFileSize(1, 'MEGABYTES');
+		$this->uploader->maxFileSize(1, 'MEGABYTES');
 		$this->assertEquals(1e+6, $this->uploader->getMaxFileSize());
-		$this->uploader->setMaxFileSize(1, 'MB');
+		$this->uploader->maxFileSize(1, 'MB');
 		$this->assertEquals(1e+6, $this->uploader->getMaxFileSize());
-		$this->uploader->setMaxFileSize(1, 'megabyte');
+		$this->uploader->maxFileSize(1, 'megabyte');
 		$this->assertEquals(1e+6, $this->uploader->getMaxFileSize());
 	}
 
@@ -278,7 +280,7 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_sets_an_invalid_file_size()
 	{
 		$this->setExpectedException('Exception');
-		$this->uploader->setMaxFileSize('one', 'B');
+		$this->uploader->maxFileSize('one', 'B');
 	}
 
 	/**
@@ -287,7 +289,7 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_sets_an_invalid_file_size_unit()
 	{
 		$this->setExpectedException('Exception');
-		$this->uploader->setMaxFileSize(1, 'GB');
+		$this->uploader->maxFileSize(1, 'GB');
 	}
 
 	/**
@@ -304,12 +306,12 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function it_proves_that_blocked_mime_types_take_precedence()
 	{
-		$this->setExpectedException('FileUploader\Exceptions\InvalidFileTypeException', "Invalid File Type: text/plain type has been blocked");
-		$this->uploader->setFilename(rand() . '.txt');
-		$this->uploader->setPath('files/');
-		$this->uploader->setBlockedMimeTypes(['text/plain']);
-		$this->uploader->setAllowedMimeTypes(['text/plain', 'image/jpeg']);
-		$this->uploader->uploadFile();
+		$this->setExpectedException('FileUploader\Exceptions\InvalidFileTypeException', "Invalid File Type: inode/x-empty type has been blocked");
+		$this->uploader->filename(rand() . '.txt');
+		$this->uploader->uploadPath('files/');
+		$this->uploader->blockedMimeTypes(['text/plain', 'inode/x-empty']);
+		$this->uploader->allowedMimeTypes(['inode/x-empty', 'image/jpeg']);
+		$this->uploader->upload();
 	}
 
 	/**
@@ -318,11 +320,13 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	public function it_chains_options_together_and_returns_the_upload_path()
 	{
 		$upload = (new FileUploader($this->getFile()))
-			->setPath('files/')
-			->setAllowedMimeTypes(['text/plain'])
+			->uploadPath('files/')
+			->allowedMimeTypes(['inode/x-empty'])
 			->overwrite(false)
 			->makeFilenameUnique(true)
-			->uploadFile();
+			->upload();
 		$this->assertEquals('files/test_1.txt', $upload);
+		unlink('files/test_1.txt');
 	}
+
 }

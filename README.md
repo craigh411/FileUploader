@@ -20,14 +20,16 @@ The easiest way to install is via Composer:
 
 or you can add `craigh/file-uploader` to your composer.json file and run `composer update`
 
-If you don't use composer then you can of course just clone the repository, download the zip file or copy and paste the code in to your project.
 
+**Note:**The FileUploader requires symfony/HttpFoundation, so if you are not using composer you will need to
+make sure you have this library in your include path.
 
 ## Usage
 
-The FileUploader accepts a FileUploader\File object. You can easily retrieve an instance by passing the $_FILES['Your_field_name'] variable into the getInstance() method:
+The FileUploader requires a 'Symfony\Component\HttpFoundation\File\UploadedFile' object. You can easily retrieve an instance by passing the $_FILES['Your_field_name'] variable into the getUploadedFile() method
+on the FileUploader\File class:
 
-`$file = FileUploader\File::getInstance($_FILES['file']);`
+`$file = FileUploader\File::getUploadedFile($_FILES['file']);`
 
 This can then be passed in to the FileUploader:
 
@@ -35,76 +37,79 @@ This can then be passed in to the FileUploader:
 
 You can then upload the file as follows:
 
-`$uploader->uploadFile();`
+`$uploader->upload();`
 
 ## Options
 
-##### setPath(string)
+##### uploadPath(string)
 Sets the upload path. This can also be set via the second parameter on the constructor (defaults to current directory)
 
-`$uploader->setPath('path/to/dir');`
+`$uploader->uploadPath('path/to/dir');`
 
 ##### overwrite(boolean)
 Set to true to allow overwriting of files with the same name (default: false)
 
 `$uploader->overwrite(true);`
 
-##### setAllowedMimeTypes(array) 
+##### allowedMimeTypes(array) 
 Pass in an array of allowed mime types, everything else will be blocked. When empty all file types will be allowed unless
 explicitly blocked.
 
-`$uploader->setAllowedMimeTypes(['image/jpeg,'image/png', 'image/gif']);`
+`$uploader->allowedMimeTypes(['image/jpeg,'image/png', 'image/gif']);`
 
-##### setBlockedMimeTypes(array)
+##### blockedMimeTypes(array)
 You can also block file types if you prefer. Pass in an array of mime types you want to block
 
-`$uploader->setBlockedMimeTypes(['application/x-msdownload']);`
+`$uploader->blockedMimeTypes(['application/x-msdownload']);`
 
 
-#####setMaxFileSize($size, $unit)
+##### maxFileSize($size, $unit)
 The maximum file size you want to allow, expects size to be a number and unit to be either:
 - B - Byte
 - KB - Kilobyte
 - MB - Megabyte
 
-`$uploader->setMaxFileSize(5, 'MB');`
+`$uploader->maxFileSize(5, 'MB');`
 
 You can also use the words BYTE, BYTES, KILOBYTE, KILOBYTES, MEGABYTE or MEGABYTES if you prefer:
 
-`$uploader->setMaxFileSize(1, 'MEGABYTE');`
+`$uploader->maxFileSize(1, 'MEGABYTE');`
 
-#####createDirIfNotExists(bool)
+##### createDirs(bool)
 If set to true this will recursively create any specified directories if they do not exist (default: false)
 
-`$uploader->createDirIfNotExists(true);`
+`$uploader->createDirs(true);`
 
 ##### makeFilenameUnique(bool)
 If set to true this will make the filename unique by appending a _{number} to the end.
 
 `$uploader->makeFilenameUnique(true);`
 
-##### setFilename(string)
+##### filename(string)
 By default the filename will be a sanitised version of the uploaded filename. Use this method if you want to set your own filename.
 
-`$uploader->setFilename('myFile.txt');`
+`$uploader->filename('myFile.txt');`
 
 **Note:** When using this method the filename will not be sanatised, if you want to sanatise the filename you can use the
-makeFilenameSafe() method
+sanitizeFilename() method
 
-##### makeFilenameSafe()
+##### sanitizeFilename()
 Sanitises the given filename by removing any dangerous characters and replaces any spaces with an underscore. You will only need to call this if you want to set your
-own filenames using the setFilename() method, otherwise this method is called automatically.
+own filenames using the filename() method, otherwise this method is called automatically.
 You should also be aware that this call will need to be made after you set your filename:
 
 ```
-$uploader->setFilename('my%$crazy@filename.txt');
-$uploader->makeFilenameSafe();
+$uploader->filename('my%$crazy@filename.txt')->sanitizeFilename();
 ```
 
-##### uploadFile() 
+##### upload() 
 Uploads the file and returns the upload path.
 
-`$uploadPath = $uploader->uploadFile();`
+`$uploadPath = $uploader->upload();`
+
+upload() is an alias of move(), so you can also use the move() method if you feel it's wording is more appropriate:
+
+`$uploadPath = $uploader->move();`
 
 ## Chaining
 
@@ -116,8 +121,7 @@ use FileUploader\FileUploader;
 
 $file = File::getInstance($_FILE['file']);
 $uploader = new FileUploader($file);
-$uploader->setPath->('files')->overwrite(true)->uploadFile();
-
+$uploader->uploadPath->('files')->overwrite(true)->upload();
 ```
 
 or even
@@ -127,8 +131,7 @@ use FileUploader\File;
 use FileUploader\FileUploader;
 
 $file = File::getInstance($_FILE['file']);
-$uploader = (new FileUploader($file))->uploadFile();
-
+$uploader = (new FileUploader($file))->upload();
 ```
 
 ## Config by Extending the FileUploader Class
@@ -158,10 +161,9 @@ This can then be used as follows:
 ```
 use FileUploader\File;
 
-$image = File::getInstance($_FILE['image']);
+$image = File::getUploadedFile($_FILE['image']);
 $uploader = new ImageUploader($image);
-$image->uploadFile();
-
+$image->upload();
 ```
 
 The following variables are protected and so can be set by child classes:

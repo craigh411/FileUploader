@@ -7,6 +7,7 @@ use FileUploader\Exceptions\DirectoryNotFoundException;
 use FileUploader\Exceptions\FileSizeTooLargeException;
 use FileUploader\Exceptions\InvalidFileTypeException;
 use FileUploader\Exceptions\NoOverwritePermissionException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Allows file uploads via web form
@@ -14,40 +15,39 @@ use FileUploader\Exceptions\NoOverwritePermissionException;
  * Class FileUploader
  * @package FileUploader
  */
-class FileUploader implements Uploader{
+class FileUploader implements Uploader {
 
-	private $path;
 	private $filename;
-	private $fileSize;
-	private $fileType;
-	private $tmpName;
+	private $path;
 	protected $allowedMimeTypes = [];
 	protected $blockedMimeTypes = [];
 	protected $maxFileSize = 1000000;
 	protected $makeFilenameUnique = false;
 	protected $overwrite = false;
 	protected $createDirIfNotExists = false;
+	/**
+	 * @var UploadedFile
+	 */
+	private $file;
 
-	function __construct(File $file, $path = '/')
+	function __construct(UploadedFile $file, $path = '/')
 	{
-		$this->setPath($path);
-		$this->setFile($file);
+		$this->uploadPath($path);
+		$this->file($file);
 
 		return $this;
 	}
 
 	/**
-	 * Used to set the uploaded file.
-	 * @param $file
-	 * @return FileUploader
+	 * Sets the uploaded file to be validated and moved
+	 * @param UploadedFile $file
+	 * @return $this
 	 */
-	public function setFile(File $file)
+	public function file(UploadedFile $file)
 	{
-		$this->filename = $file->getFilename();
-		$this->fileSize = $file->getSize();
-		$this->fileType = $file->getType();
-		$this->tmpName = $file->getTmpName();
-		$this->makeFilenameSafe();
+		$this->file = $file;
+		$this->filename = $file->getClientOriginalName();
+		$this->sanitizeFilename();
 
 		return $this;
 	}
@@ -56,7 +56,7 @@ class FileUploader implements Uploader{
 	 * Removes any unsafe characters from the filename. Replaces any spaces with an underscore (_)
 	 * @return FileUploader
 	 */
-	public function makeFilenameSafe()
+	public function sanitizeFilename()
 	{
 		// Regex for replacing special chars
 		$filename = $this->filename;
@@ -70,41 +70,49 @@ class FileUploader implements Uploader{
 	}
 
 	/**
-	 * Validates the file against the given rules and uploads the file
-	 * @throws Exception
+	 * Validates and moves the uploaded file to it's destination
 	 * @return String
 	 */
-	public function uploadFile()
+	public function move()
 	{
 		// Make sure the filename is unique if makeFilenameUnique is set to true
 		if($this->makeFilenameUnique)
 		{
-			$this->createUniqueFilename();
+			$this->getUniqueFilename();
 		}
 		if($this->_validate())
 		{
 			// Validation passed so create any directories and move the tmp file to the specified location.
 			$this->_createDirs();
-			move_uploaded_file($this->tmpName, $this->getPath());
+			// This will also perform some validations on the upload.
+			$this->file->move($this->path, $this->filename);
 		}
 
 		return $this->getPath();
 	}
 
 	/**
+	 * Alias for the move method
+	 * @return String
+	 */
+	public function upload()
+	{
+		return $this->move();
+	}
+
+	/**
 	 * Returns a unique file name for the upload by appending a sequential number. Checks to make sure file doesn't exist before returning a name.
 	 * @return String
 	 */
-	public function createUniqueFilename()
+	public function getUniqueFilename()
 	{
 		list($filename, $extension) = explode(".", $this->filename);
 		$increment = 1;
-		while($this->fileExists($filename, $extension))
+		while($this->fileExists($filename . "_" . $increment, $extension))
 		{
-			$filename = $filename . "_" . $increment;
 			$increment++;
 		}
-		$this->filename = $filename . '.' . $extension;
+		$this->filename = $filename . "_" . $increment . '.' . $extension;
 
 		return $this;
 	}
@@ -154,7 +162,7 @@ class FileUploader implements Uploader{
 	 * @param string $path
 	 * @return FileUploader
 	 */
-	public function setPath($path)
+	public function uploadPath($path)
 	{
 		$this->path = $path;
 		if(strlen($this->path) > 0 && ! preg_match('/\/$/', $this->path))
@@ -206,7 +214,7 @@ class FileUploader implements Uploader{
 	 */
 	private function checkFileSize()
 	{
-		if($this->fileSize > $this->maxFileSize)
+		if($this->file->getSize() > $this->maxFileSize)
 		{
 			throw new FileSizeTooLargeException;
 		}
@@ -220,9 +228,9 @@ class FileUploader implements Uploader{
 	{
 		if(count($this->allowedMimeTypes) > 0)
 		{
-			if(! in_array($this->fileType, $this->allowedMimeTypes))
+			if(! in_array($this->file->getMimeType(), $this->allowedMimeTypes))
 			{
-				throw new InvalidFileTypeException("Invalid File Type: " . $this->fileType . " has not been allowed");
+				throw new InvalidFileTypeException("Invalid File Type: " . $this->file->getMimeType() . " has not been allowed");
 			}
 		}
 	}
@@ -235,9 +243,9 @@ class FileUploader implements Uploader{
 	 */
 	private function checkFileTypeIsNotBlocked()
 	{
-		if(in_array($this->fileType, $this->blockedMimeTypes))
+		if(in_array($this->file->getMimeType(), $this->blockedMimeTypes))
 		{
-			throw new InvalidFileTypeException("Invalid File Type: " . $this->fileType . " type has been blocked");
+			throw new InvalidFileTypeException("Invalid File Type: " . $this->file->getMimeType() . " type has been blocked");
 		}
 	}
 
@@ -276,7 +284,7 @@ class FileUploader implements Uploader{
 	 * @param array $allowedMimeTypes
 	 * @return FileUploader
 	 */
-	public function setAllowedMimeTypes($allowedMimeTypes)
+	public function allowedMimeTypes($allowedMimeTypes)
 	{
 		$this->allowedMimeTypes = $allowedMimeTypes;
 
@@ -298,7 +306,7 @@ class FileUploader implements Uploader{
 	 * @param array $blockedMimeTypes
 	 * @return FileUploader
 	 */
-	public function setBlockedMimeTypes($blockedMimeTypes)
+	public function blockedMimeTypes($blockedMimeTypes)
 	{
 		$this->blockedMimeTypes = $blockedMimeTypes;
 
@@ -322,7 +330,7 @@ class FileUploader implements Uploader{
 	 * @throws Exception
 	 * @return FileUploader
 	 */
-	public function setMaxFileSize($size, $unit = "B")
+	public function maxFileSize($size, $unit = "B")
 	{
 		$unit = strtoupper($unit);
 		if(! is_numeric($size))
@@ -354,7 +362,7 @@ class FileUploader implements Uploader{
 	 * @param bool $createDir
 	 * @return FileUploader
 	 */
-	public function createDirIfNotExists($createDir)
+	public function createDirs($createDir)
 	{
 		$this->createDirIfNotExists = $createDir;
 
@@ -365,7 +373,7 @@ class FileUploader implements Uploader{
 	 * Returns the value of createDirIfNotExists for directory creation.
 	 * @return bool
 	 */
-	public function canCreateDirIfNotExists()
+	public function canCreateDirs()
 	{
 		return $this->createDirIfNotExists;
 	}
@@ -393,11 +401,11 @@ class FileUploader implements Uploader{
 
 	/**
 	 * returns the file details
-	 * @return \FileUploader\File
+	 * @return UploadedFile
 	 */
 	public function getFile()
 	{
-		return new File($this->filename, $this->fileSize, $this->fileType, $this->tmpName);
+		return $this->file;
 	}
 
 	/**
@@ -415,7 +423,7 @@ class FileUploader implements Uploader{
 	 * @param $filename
 	 * @return FileUploader
 	 */
-	public function setFilename($filename)
+	public function filename($filename)
 	{
 		$this->filename = $filename;
 

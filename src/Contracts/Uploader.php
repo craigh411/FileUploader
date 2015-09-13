@@ -2,7 +2,7 @@
 namespace FileUploader\Contracts;
 
 use Exception;
-use FileUploader\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Allows file uploads via web form
@@ -14,29 +14,36 @@ interface Uploader {
 
 	/**
 	 * Used to set the uploaded file.
-	 * @param $file
+	 * @param UploadedFile $file
 	 * @return Uploader
 	 */
-	public function setFile(File $file);
+	public function file(UploadedFile $file);
 
 	/**
 	 * Removes any unsafe characters from the filename. Replaces any spaces with an underscore (_)
 	 * @return Uploader
 	 */
-	public function makeFilenameSafe();
+	public function sanitizeFilename();
 
 	/**
 	 * Validates the file against the given rules and uploads the file
 	 * @throws Exception
 	 * @return String
 	 */
-	public function uploadFile();
+	public function move();
+
+	/**
+	 * Alias of move()
+	 * @return String
+	 * @throws Exception
+	 */
+	public function upload();
 
 	/**
 	 * Returns a unique file name for the upload by appending a sequential number. Checks to make sure file doesn't exist before returning a name.
 	 * @return String
 	 */
-	public function createUniqueFilename();
+	public function getUniqueFilename();
 
 	/**
 	 * Returns the path of the uploaded file
@@ -49,7 +56,7 @@ interface Uploader {
 	 * @param string $path
 	 * @return Uploader
 	 */
-	public function setPath($path);
+	public function uploadPath($path);
 
 	/**
 	 * Defines whether an uploaded file can overwrite a file with the same name (false by default)
@@ -75,7 +82,7 @@ interface Uploader {
 	 * @param array $allowedMimeTypes
 	 * @return Uploader
 	 */
-	public function setAllowedMimeTypes($allowedMimeTypes);
+	public function allowedMimeTypes($allowedMimeTypes);
 
 	/**
 	 * Gets the array of blocked MIME Types
@@ -89,7 +96,7 @@ interface Uploader {
 	 * @param array $blockedMimeTypes
 	 * @return Uploader
 	 */
-	public function setBlockedMimeTypes($blockedMimeTypes);
+	public function blockedMimeTypes($blockedMimeTypes);
 
 	/**
 	 * Returns the maximum file size allowed
@@ -105,20 +112,20 @@ interface Uploader {
 	 * @throws Exception
 	 * @return Uploader
 	 */
-	public function setMaxFileSize($size, $unit = "B");
+	public function maxFileSize($size, $unit = "B");
 
 	/**
 	 * Defines whether a directory should be created if it doesn't exist.
 	 * @param bool $createDir
 	 * @return Uploader
 	 */
-	public function createDirIfNotExists($createDir);
+	public function createDirs($createDir);
 
 	/**
 	 * Returns the value of createDirIfNotExists for directory creation.
 	 * @return bool
 	 */
-	public function canCreateDirIfNotExists();
+	public function canCreateDirs();
 
 	/**
 	 * If set to true this will make sure the file name is unique
@@ -135,7 +142,7 @@ interface Uploader {
 
 	/**
 	 * returns the file details
-	 * @return File
+	 * @return UploadedFile
 	 */
 	public function getFile();
 
@@ -151,5 +158,5 @@ interface Uploader {
 	 * @param $filename
 	 * @return Uploader
 	 */
-	public function setFilename($filename);
+	public function filename($filename);
 }
