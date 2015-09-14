@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class FileUploader implements Uploader {
 
 	private $filename;
-	private $path;
+	protected $uploadPath;
 	protected $allowedMimeTypes = [];
 	protected $blockedMimeTypes = [];
 	protected $maxFileSize = 1000000;
@@ -85,10 +85,10 @@ class FileUploader implements Uploader {
 			// Validation passed so create any directories and move the tmp file to the specified location.
 			$this->_createDirs();
 			// This will also perform some validations on the upload.
-			$this->file->move($this->path, $this->filename);
+			$this->file->move($this->uploadPath, $this->filename);
 		}
 
-		return $this->getPath();
+		return $this->getUploadPath();
 	}
 
 	/**
@@ -142,9 +142,9 @@ class FileUploader implements Uploader {
 	 */
 	private function _createDirs()
 	{
-		if(! is_dir($this->path))
+		if(! is_dir($this->uploadPath))
 		{
-			mkdir($this->path, 0777, true);
+			mkdir($this->uploadPath, 0777, true);
 		}
 	}
 
@@ -152,9 +152,9 @@ class FileUploader implements Uploader {
 	 * Returns the path of the uploaded file
 	 * @return String
 	 */
-	public function getPath()
+	public function getUploadPath()
 	{
-		return $this->path . $this->filename;
+		return $this->uploadPath . $this->filename;
 	}
 
 	/**
@@ -164,10 +164,10 @@ class FileUploader implements Uploader {
 	 */
 	public function uploadPath($path)
 	{
-		$this->path = $path;
-		if(strlen($this->path) > 0 && ! preg_match('/\/$/', $this->path))
+		$this->uploadPath = $path;
+		if(strlen($this->uploadPath) > 0 && ! preg_match('/\/$/', $this->uploadPath))
 		{
-			$this->path .= "/";
+			$this->uploadPath .= "/";
 		}
 
 		return $this;
@@ -181,7 +181,7 @@ class FileUploader implements Uploader {
 	 */
 	private function fileExists($filename, $extension)
 	{
-		return is_file($this->path . $filename . "." . $extension);
+		return is_file($this->uploadPath . $filename . "." . $extension);
 	}
 
 	/**
@@ -190,7 +190,7 @@ class FileUploader implements Uploader {
 	 */
 	private function checkOverwritePermission()
 	{
-		if(! $this->overwrite && is_file($this->path . $this->filename))
+		if(! $this->overwrite && is_file($this->uploadPath . $this->filename))
 		{
 			throw new NoOverwritePermissionException;
 		}
@@ -202,7 +202,7 @@ class FileUploader implements Uploader {
 	 */
 	private function checkHasValidUploadDirectory()
 	{
-		if(! is_dir($this->path) && ! $this->createDirIfNotExists)
+		if(! is_dir($this->uploadPath) && ! $this->createDirIfNotExists)
 		{
 			throw new DirectoryNotFoundException;
 		}

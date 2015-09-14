@@ -49,7 +49,7 @@ interface Uploader {
 	 * Returns the path of the uploaded file
 	 * @return String
 	 */
-	public function getPath();
+	public function getUploadPath();
 
 	/**
 	 * Sets the upload path, second parameter can be passed to create directory if it doesn't exist
