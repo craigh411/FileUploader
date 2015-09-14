@@ -13,7 +13,7 @@ class TestUploader extends FileUploader{
 	protected $maxFileSize = 10;
 	protected $makeFilenameUnique = true;
 	protected $overwrite = true;
-	protected $createDirIfNotExists = true;
+	protected $createDirs = true;
 
 	protected $blockedMimeTypes = [
 		'application/x-msdownload'

@@ -10,5 +10,5 @@ class ImageUploader extends FileUploader {
 		'image/png',
 		'image/gif'
 	];
-	protected $createDirIfNotExists = true;
+	protected $createDirs = true;
 }

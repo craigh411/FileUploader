@@ -24,7 +24,7 @@ class FileUploader implements Uploader {
 	protected $maxFileSize = 1000000;
 	protected $makeFilenameUnique = false;
 	protected $overwrite = false;
-	protected $createDirIfNotExists = false;
+	protected $createDirs = false;
 	/**
 	 * @var UploadedFile
 	 */
@@ -41,7 +41,7 @@ class FileUploader implements Uploader {
 	/**
 	 * Sets the uploaded file to be validated and moved
 	 * @param UploadedFile $file
-	 * @return $this
+	 * @return mixed
 	 */
 	public function file(UploadedFile $file)
 	{
@@ -202,7 +202,7 @@ class FileUploader implements Uploader {
 	 */
 	private function checkHasValidUploadDirectory()
 	{
-		if(! is_dir($this->uploadPath) && ! $this->createDirIfNotExists)
+		if(! is_dir($this->uploadPath) && ! $this->createDirs)
 		{
 			throw new DirectoryNotFoundException;
 		}
@@ -364,7 +364,7 @@ class FileUploader implements Uploader {
 	 */
 	public function createDirs($createDir)
 	{
-		$this->createDirIfNotExists = $createDir;
+		$this->createDirs = $createDir;
 
 		return $this;
 	}
@@ -375,7 +375,7 @@ class FileUploader implements Uploader {
 	 */
 	public function canCreateDirs()
 	{
-		return $this->createDirIfNotExists;
+		return $this->createDirs;
 	}
 
 	/**
