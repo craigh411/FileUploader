@@ -1,5 +1,5 @@
 <?php
-namespace FileUploader;
+namespace Humps\FileUploader;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

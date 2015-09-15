@@ -16,12 +16,12 @@
   },
   "autoload": {
     "psr-4": {
-      "FileUploader\\": "src"
+      "Humps\\FileUploader\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "FileUploader\\Tests\\": "tests"
+      "Humps\\FileUploader\\Tests\\": "tests"
     }
   }
 }

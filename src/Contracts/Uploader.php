@@ -1,5 +1,5 @@
 <?php
-namespace FileUploader\Contracts;
+namespace Humps\FileUploader\Contracts;
 
 use Exception;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -49,15 +49,20 @@ interface Uploader {
 	 * Returns the path of the uploaded file
 	 * @return String
 	 */
-	public function getUploadPath();
+	public function getUploadDir();
 
 	/**
-	 * Sets the upload path, second parameter can be passed to create directory if it doesn't exist
+	 * Sets the upload directory
 	 * @param string $path
 	 * @return Uploader
 	 */
-	public function uploadPath($path);
+	public function uploadDir($path);
 
+	/**
+	 * Returns the upload path
+	 * @return string
+	 */
+	public function getUploadPath();
 	/**
 	 * Defines whether an uploaded file can overwrite a file with the same name (false by default)
 	 * @param bool $overwrite

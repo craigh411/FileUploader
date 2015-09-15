@@ -1,5 +1,5 @@
 <?php
-namespace FileUploader\Exceptions;
+namespace Humps\FileUploader\Exceptions;
 
 use Exception;
 

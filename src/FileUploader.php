@@ -1,12 +1,12 @@
 <?php
-namespace FileUploader;
+namespace Humps\FileUploader;
 
 use Exception;
-use FileUploader\Contracts\Uploader;
-use FileUploader\Exceptions\DirectoryNotFoundException;
-use FileUploader\Exceptions\FileSizeTooLargeException;
-use FileUploader\Exceptions\InvalidFileTypeException;
-use FileUploader\Exceptions\NoOverwritePermissionException;
+use Humps\FileUploader\Contracts\Uploader;
+use Humps\FileUploader\Exceptions\DirectoryNotFoundException;
+use Humps\FileUploader\Exceptions\FileSizeTooLargeException;
+use Humps\FileUploader\Exceptions\InvalidFileTypeException;
+use Humps\FileUploader\Exceptions\NoOverwritePermissionException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -17,23 +17,23 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class FileUploader implements Uploader {
 
-	private $filename;
-	protected $uploadPath;
+	protected $uploadDir;
 	protected $allowedMimeTypes = [];
 	protected $blockedMimeTypes = [];
 	protected $maxFileSize = 1000000;
 	protected $makeFilenameUnique = false;
 	protected $overwrite = false;
 	protected $createDirs = false;
+	private $filename;
 	/**
 	 * @var UploadedFile
 	 */
 	private $file;
 
-	function __construct(UploadedFile $file, $path = '/')
+	function __construct(UploadedFile $file)
 	{
-		$this->uploadPath($path);
 		$this->file($file);
+		$this->uploadDir = $this->uploadDir ?: '/';
 
 		return $this;
 	}
@@ -70,6 +70,24 @@ class FileUploader implements Uploader {
 	}
 
 	/**
+	 * Returns the upload directory
+	 * @return string
+	 */
+	public function getUploadDir()
+	{
+		return $this->uploadDir;
+	}
+
+	/**
+	 * Alias for the move method
+	 * @return String
+	 */
+	public function upload()
+	{
+		return $this->move();
+	}
+
+	/**
 	 * Validates and moves the uploaded file to it's destination
 	 * @return String
 	 */
@@ -85,19 +103,10 @@ class FileUploader implements Uploader {
 			// Validation passed so create any directories and move the tmp file to the specified location.
 			$this->_createDirs();
 			// This will also perform some validations on the upload.
-			$this->file->move($this->uploadPath, $this->filename);
+			$this->file->move($this->uploadDir, $this->filename);
 		}
 
 		return $this->getUploadPath();
-	}
-
-	/**
-	 * Alias for the move method
-	 * @return String
-	 */
-	public function upload()
-	{
-		return $this->move();
 	}
 
 	/**
@@ -142,9 +151,9 @@ class FileUploader implements Uploader {
 	 */
 	private function _createDirs()
 	{
-		if(! is_dir($this->uploadPath))
+		if(! is_dir($this->uploadDir))
 		{
-			mkdir($this->uploadPath, 0777, true);
+			mkdir($this->uploadDir, 0777, true);
 		}
 	}
 
@@ -154,23 +163,16 @@ class FileUploader implements Uploader {
 	 */
 	public function getUploadPath()
 	{
-		return $this->uploadPath . $this->filename;
+		return $this->uploadDir . $this->filename;
 	}
 
-	/**
-	 * Sets the upload path, second parameter can be passed to create directory if it doesn't exist
-	 * @param string $path
-	 * @return FileUploader
+	/**.
+	 * Returns the filename
+	 * @return string
 	 */
-	public function uploadPath($path)
+	public function getFilename()
 	{
-		$this->uploadPath = $path;
-		if(strlen($this->uploadPath) > 0 && ! preg_match('/\/$/', $this->uploadPath))
-		{
-			$this->uploadPath .= "/";
-		}
-
-		return $this;
+		return $this->filename;
 	}
 
 	/**
@@ -181,7 +183,7 @@ class FileUploader implements Uploader {
 	 */
 	private function fileExists($filename, $extension)
 	{
-		return is_file($this->uploadPath . $filename . "." . $extension);
+		return is_file($this->uploadDir . $filename . "." . $extension);
 	}
 
 	/**
@@ -190,7 +192,7 @@ class FileUploader implements Uploader {
 	 */
 	private function checkOverwritePermission()
 	{
-		if(! $this->overwrite && is_file($this->uploadPath . $this->filename))
+		if(! $this->overwrite && is_file($this->getUploadPath()))
 		{
 			throw new NoOverwritePermissionException;
 		}
@@ -202,7 +204,7 @@ class FileUploader implements Uploader {
 	 */
 	private function checkHasValidUploadDirectory()
 	{
-		if(! is_dir($this->uploadPath) && ! $this->createDirs)
+		if(! is_dir($this->uploadDir) && ! $this->createDirs)
 		{
 			throw new DirectoryNotFoundException;
 		}
@@ -247,6 +249,22 @@ class FileUploader implements Uploader {
 		{
 			throw new InvalidFileTypeException("Invalid File Type: " . $this->file->getMimeType() . " type has been blocked");
 		}
+	}
+
+	/**
+	 * Sets the upload directory
+	 * @param string $path
+	 * @return FileUploader
+	 */
+	public function uploadDir($dir)
+	{
+		$this->uploadDir = $dir;
+		if(! $this->hasTrailingSlash())
+		{
+			$this->uploadDir .= "/";
+		}
+
+		return $this;
 	}
 
 	/**
@@ -409,15 +427,6 @@ class FileUploader implements Uploader {
 	}
 
 	/**
-	 * Returns the filename
-	 * @return string
-	 */
-	public function getFilename()
-	{
-		return $this->filename;
-	}
-
-	/**
 	 * Sets the output filename.
 	 * A second boolean parameter can be passed if you do not want to make the filename safe.
 	 * @param $filename
@@ -428,5 +437,13 @@ class FileUploader implements Uploader {
 		$this->filename = $filename;
 
 		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function hasTrailingSlash()
+	{
+		return preg_match('/\/$/', $this->uploadDir);
 	}
 }

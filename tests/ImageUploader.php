@@ -1,7 +1,7 @@
 <?php
-namespace FileUploader\Tests;
+namespace Humps\FileUploader\Tests;
 
-use FileUploader\FileUploader;
+use Humps\FileUploader\FileUploader;
 
 class ImageUploader extends FileUploader{
 
