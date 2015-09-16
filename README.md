@@ -27,13 +27,13 @@ make sure you have this library in your include path.
 ## Usage
 
 The FileUploader requires a `Symfony\Component\HttpFoundation\File\UploadedFile` object. You can easily retrieve an instance by passing the $_FILES['Your_field_name'] variable into the getUploadedFile() method
-on the FileUploader\File class:
+on the `Humps\FileUploader\File` class:
 
-`$file = FileUploader\File::getUploadedFile($_FILES['file']);`
+`$file = Humps\FileUploader\File::getUploadedFile($_FILES['file']);`
 
 This can then be passed in to the FileUploader:
 
-`$uploader = new FileUploader\FileUploader($file);`
+`$uploader = new Humps\FileUploader\FileUploader($file);`
 
 You can then upload the file as follows:
 
@@ -41,10 +41,10 @@ You can then upload the file as follows:
 
 ## Options
 
-##### uploadPath(string)
-Sets the upload path. This can also be set via the second parameter on the constructor (defaults to current directory)
+##### uploadDir(string)
+Sets the upload path. It will also append any required '/' if it is not set, so both 'path/to/dir' and 'path/to/dir/' will work (defaults to current directory)
 
-`$uploader->uploadPath('path/to/dir');`
+`$uploader->uploadDir('path/to/dir');`
 
 ##### overwrite(boolean)
 Set to true to allow overwriting of files with the same name (default: false)
@@ -90,13 +90,11 @@ By default the filename will be a sanitised version of the uploaded filename. Us
 
 `$uploader->filename('myFile.txt');`
 
-**Note:** When using this method the filename will not be sanatised, if you want to sanatise the filename you can use the
-sanitizeFilename() method
+**Note:** When using this method the filename will not be sanatised, if you want to sanatise the filename you can use the sanitizeFilename() method.
 
 ##### sanitizeFilename()
-Sanitises the given filename by removing any dangerous characters and replaces any spaces with an underscore. You will only need to call this if you want to set your
-own filenames using the filename() method, otherwise this method is called automatically.
-You should also be aware that this call will need to be made after you set your filename:
+
+Sanitises the given filename by removing any non alpha numeric characters and replacing any spaces with an underscore. You will only need to call this if you want to set your own filenames using the filename() method, otherwise this method is called automatically. You should also be aware that this call will need to be made after you set your filename:
 
 ```
 $uploader->filename('my%$crazy@filename.txt')->sanitizeFilename();
@@ -116,8 +114,8 @@ upload() is an alias of move(), so you can also use the move() method if you fee
 All methods above can be applied in a chain for a clean syntax:
 
 ```
-use FileUploader\File;
-use FileUploader\FileUploader;
+use Humps\FileUploader\File;
+use Humps\FileUploader\FileUploader;
 
 $file = File::getUploadedFile($_FILE['file']);
 $uploader = new FileUploader($file);
@@ -127,8 +125,8 @@ $uploader->uploadPath->('files')->overwrite(true)->upload();
 or even
 
 ```
-use FileUploader\File;
-use FileUploader\FileUploader;
+use Humps\FileUploader\File;
+use Humps\FileUploader\FileUploader;
 
 $file = File::getUploadedFile($_FILE['file']);
 $uploader = (new FileUploader($file))->upload();
@@ -140,7 +138,7 @@ For a cleaner way to configure you uploads you can extend the FileUploader class
 variables, e.g.:
 
 ```
-use FileUploader\FileUploader;
+use Humps\FileUploader\FileUploader;
 
 class ImageUploader extends FileUploader{
 
@@ -159,7 +157,7 @@ class ImageUploader extends FileUploader{
 This can then be used as follows:
 
 ```
-use FileUploader\File;
+use Humps\FileUploader\File;
 
 $image = File::getUploadedFile($_FILE['image']);
 $uploader = new ImageUploader($image);
@@ -169,6 +167,7 @@ $image->upload();
 The following variables are protected and so can be set by child classes:
 
 ```
+protected $uploadDir = '';
 protected $allowedMimeTypes = [];
 protected $blockedMimeTypes = [];
 protected $maxFileSize = 1000000;
