@@ -15,13 +15,11 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 
 	protected function setUp()
 	{
-		$handle = fopen('tmp/tmp.txt','w+');
-		fwrite($handle,'');
+		$handle = fopen('tmp/tmp.txt', 'w+');
+		fwrite($handle, '');
 		fclose($handle);
-
 		$this->uploader = new FileUploader($this->getFile());
 	}
-
 
 	protected function getFile($tmp = 'tmp/tmp.txt', $file = 'test.txt')
 	{
@@ -148,7 +146,6 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 		$overwrite = $uploader->canOverwrite();
 		$createDirIfNotExists = $uploader->canCreateDirs();
 		$blockedMimeTypes = $uploader->getBlockedMimeTypes();
-
 		$this->assertEquals('uploads/', $uploadDir);
 		$this->assertEquals(10, $maxFileSize);
 		$this->assertTrue($makeFilenameUnique);
@@ -214,7 +211,6 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 		$this->uploader->blockedMimeTypes(['inode/x-empty']);
 		$this->uploader->upload();
 	}
-
 
 	/**
 	 * @test
@@ -335,13 +331,18 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	{
 		$this->uploader->uploadDir('uploads');
 		$this->assertEquals('uploads/', $this->uploader->getUploadDir());
-
 		$this->uploader->uploadDir('');
 		$this->assertEquals('/', $this->uploader->getUploadDir());
-
 		$this->uploader->uploadDir('uploads/');
 		$this->assertEquals('uploads/', $this->uploader->getUploadDir());
-
 	}
 
+	/**
+	 * @test
+	 */
+	public function it_tries_to_set_a_file_size_larger_than_upload_file_size_in_php_init()
+	{
+		$this->setExpectedException('Exception', 'Max file size cannot exceed upload_max_filesize in php.ini');
+		$this->uploader->maxFileSize(100, 'MB');
+	}
 }

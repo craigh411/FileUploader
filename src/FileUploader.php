@@ -102,8 +102,15 @@ class FileUploader implements Uploader {
 		{
 			// Validation passed so create any directories and move the tmp file to the specified location.
 			$this->_createDirs();
-			// This will also perform some validations on the upload.
-			$this->file->move($this->uploadDir, $this->filename);
+			if($this->file->isValid())
+			{
+				// This will also perform some validations on the upload.
+				$this->file->move($this->uploadDir, $this->filename);
+			}
+			else
+			{
+				throw new Exception($this->file->getErrorMessage());
+			}
 		}
 
 		return $this->getUploadPath();
@@ -370,6 +377,10 @@ class FileUploader implements Uploader {
 		else
 		{
 			throw new Exception("Invalid unit in setMaxFileSize: Expects 'B', 'KB' or 'MB'.");
+		}
+		if($this->maxFileSize > UploadedFile::getMaxFilesize())
+		{
+			throw new Exception("Max file size cannot exceed upload_max_filesize in php.ini");
 		}
 
 		return $this;
