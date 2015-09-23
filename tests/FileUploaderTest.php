@@ -99,6 +99,16 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('my_test_txt_file_1.txt', $this->uploader->getFilename());
 	}
 
+	/**
+	 * @test
+	 */
+	public function it_removes_all_dots_except_the_one_for_the_extension()
+	{
+		$filename = 'my... test_txt. file. 1..txt';
+		$this->uploader->filename($filename);
+		$this->uploader->sanitizeFilename();
+		$this->assertEquals('my_test_txt_file_1.txt', $this->uploader->getFilename());
+	}
 
 	/**
 	 * @test
@@ -335,5 +345,4 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 		$this->setExpectedException('Exception', 'Max file size cannot exceed upload_max_filesize in php.ini');
 		$this->uploader->maxFileSize(100, 'MB');
 	}
-
 }
