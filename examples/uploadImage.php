@@ -1,5 +1,5 @@
 <?php
-use FileUploader\File;
+use Humps\FileUploader\File;
 
 require_once 'classes/ImageUploader.php';
 try
