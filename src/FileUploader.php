@@ -63,7 +63,7 @@ class FileUploader implements Uploader {
 		$filename = preg_replace('/\s+/', '_', $filename);
 		$filename = preg_replace('/[^a-z1-9\.\-\_]/i', '', $filename);
 		// removes any dots except the last one.
-		//$filename = preg_replace('/\.(?=.*?\.)/', '', $filename);
+		$filename = preg_replace('/\.(?=.*?\.)/', '', $filename);
 		$this->filename = $filename;
 
 		return $this;
@@ -94,17 +94,21 @@ class FileUploader implements Uploader {
 	public function move()
 	{
 		// Make sure the filename is unique if makeFilenameUnique is set to true
-		if($this->makeFilenameUnique) {
+		if($this->makeFilenameUnique)
+		{
 			$this->getUniqueFilename();
 		}
-		if($this->_validate()) {
+		if($this->_validate())
+		{
 			// Validation passed so create any directories and move the tmp file to the specified location.
 			$this->_createDirs();
-			if($this->file->isValid()) {
+			if($this->file->isValid())
+			{
 				// This will also perform some validations on the upload.
 				$this->file->move($this->uploadDir, $this->filename);
 			}
-			else {
+			else
+			{
 				throw new Exception($this->file->getErrorMessage());
 			}
 		}
@@ -122,7 +126,8 @@ class FileUploader implements Uploader {
 		$filename = $pathInfo['filename'];
 		$extension = $pathInfo['extension'];
 		$increment = 1;
-		while($this->fileExists($filename . "_" . $increment, $extension)) {
+		while($this->fileExists($filename . "_" . $increment, $extension))
+		{
 			$increment++;
 		}
 		$this->filename = $filename . "_" . $increment . '.' . $extension;
@@ -155,7 +160,8 @@ class FileUploader implements Uploader {
 	 */
 	private function _createDirs()
 	{
-		if(! is_dir($this->uploadDir)) {
+		if(! is_dir($this->uploadDir))
+		{
 			mkdir($this->uploadDir, 0777, true);
 		}
 	}
@@ -195,7 +201,8 @@ class FileUploader implements Uploader {
 	 */
 	private function checkOverwritePermission()
 	{
-		if(! $this->overwrite && is_file($this->getUploadPath())) {
+		if(! $this->overwrite && is_file($this->getUploadPath()))
+		{
 			throw new NoOverwritePermissionException;
 		}
 	}
@@ -206,7 +213,8 @@ class FileUploader implements Uploader {
 	 */
 	private function checkHasValidUploadDirectory()
 	{
-		if(! is_dir($this->uploadDir) && ! $this->createDirs) {
+		if(! is_dir($this->uploadDir) && ! $this->createDirs)
+		{
 			throw new DirectoryNotFoundException;
 		}
 	}
@@ -217,8 +225,8 @@ class FileUploader implements Uploader {
 	 */
 	private function checkFileSize()
 	{
-		var_dump($this->file->getSize());
-		if($this->file->getSize() > $this->maxFileSize) {
+		if($this->file->getSize() > $this->maxFileSize)
+		{
 			throw new FileSizeTooLargeException;
 		}
 	}
@@ -229,8 +237,10 @@ class FileUploader implements Uploader {
 	 */
 	private function checkFileTypeIsAllowed()
 	{
-		if(count($this->allowedMimeTypes) > 0) {
-			if(! in_array($this->file->getMimeType(), $this->allowedMimeTypes)) {
+		if(count($this->allowedMimeTypes) > 0)
+		{
+			if(! in_array($this->file->getMimeType(), $this->allowedMimeTypes))
+			{
 				throw new InvalidFileTypeException("Invalid File Type: " . $this->file->getMimeType() . " has not been allowed");
 			}
 		}
@@ -244,7 +254,8 @@ class FileUploader implements Uploader {
 	 */
 	private function checkFileTypeIsNotBlocked()
 	{
-		if(in_array($this->file->getMimeType(), $this->blockedMimeTypes)) {
+		if(in_array($this->file->getMimeType(), $this->blockedMimeTypes))
+		{
 			throw new InvalidFileTypeException("Invalid File Type: " . $this->file->getMimeType() . " type has been blocked");
 		}
 	}
@@ -257,7 +268,8 @@ class FileUploader implements Uploader {
 	public function uploadDir($dir)
 	{
 		$this->uploadDir = $dir;
-		if(! $this->hasTrailingSlash()) {
+		if(! $this->hasTrailingSlash())
+		{
 			$this->uploadDir .= "/";
 		}
 
@@ -348,22 +360,28 @@ class FileUploader implements Uploader {
 	public function maxFileSize($size, $unit = "B")
 	{
 		$unit = strtoupper($unit);
-		if(! is_numeric($size)) {
+		if(! is_numeric($size))
+		{
 			throw new Exception("Invalid file size: expects integer");
 		}
-		if($unit === "B" || preg_match("/^BYTE(S)?$/", $unit)) {
+		if($unit === "B" || preg_match("/^BYTE(S)?$/", $unit))
+		{
 			$this->maxFileSize = $size;
 		}
-		elseif($unit === "KB" || preg_match("/^KILOBYTE(S)?$/", $unit)) {
+		elseif($unit === "KB" || preg_match("/^KILOBYTE(S)?$/", $unit))
+		{
 			$this->maxFileSize = ($size * 1000);
 		}
-		elseif($unit === "MB" || preg_match("/^MEGABYTE(S)?$/", $unit)) {
+		elseif($unit === "MB" || preg_match("/^MEGABYTE(S)?$/", $unit))
+		{
 			$this->maxFileSize = ($size * 1000000);
 		}
-		else {
+		else
+		{
 			throw new Exception("Invalid unit in setMaxFileSize: Expects 'B', 'KB' or 'MB'.");
 		}
-		if($this->maxFileSize > UploadedFile::getMaxFilesize()) {
+		if($this->maxFileSize > UploadedFile::getMaxFilesize())
+		{
 			throw new Exception("Max file size cannot exceed upload_max_filesize in php.ini");
 		}
 
