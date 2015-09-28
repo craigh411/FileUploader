@@ -342,6 +342,11 @@ class FileUploaderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function it_tries_to_set_a_file_size_larger_than_upload_file_size_in_php_init()
 	{
+		if(defined('HHVM_VERSION')){
+			$this->markTestSkipped(
+				'HHVM returns empty max_upload_size value in php.ini, test cannot be run!'
+			);
+		}
 		$this->setExpectedException('Exception', 'Max file size cannot exceed upload_max_filesize in php.ini');
 		$this->uploader->maxFileSize(100, 'MB');
 	}
