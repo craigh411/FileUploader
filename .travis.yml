@@ -16,5 +16,4 @@ php:
 
 install: composer install
 script:
-- cd tests
-- phpunit --include-path=/../vendor/autoload.php FileUploaderTest
+- phpunit tests/FileUploaderTest
