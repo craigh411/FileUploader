@@ -169,13 +169,13 @@ $image->upload();
 The following variables are protected and so can be set by child classes:
 
 ```
-protected $uploadDir = '';
-protected $allowedMimeTypes = [];
-protected $blockedMimeTypes = [];
-protected $maxFileSize = 1000000;
-protected $makeFilenameUnique = false;
-protected $overwrite = false;
-protected $createDirIfNotExists = false;
+protected $uploadDir; // Upload directory
+protected $allowedMimeTypes = []; // Only allow these file to be uploaded
+protected $blockedMimeTypes = []; // Don't allow these files to be uploaded
+protected $maxFileSize = 1000000; // In bytes
+protected $makeFilenameUnique = false; // Make the filename unique if two files have the same name
+protected $overwrite = false; // Allow overwriting of files with the same name
+protected $createDirs = false; // Allow the automatic creation of any upload directories
 ```
 
 ## A note on the examples
