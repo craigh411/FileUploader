@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/craigh411/FileUploader.svg?branch=master)](https://travis-ci.org/craigh411/FileUploader)
 
-A easily configurable file uploader for uploading files via a web form
+An easily configurable file uploader for uploading files via a web form
 
 ## Features
 
