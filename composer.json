@@ -3,6 +3,7 @@
   "description": "Allows file uploads via web form",
   "type": "library",
   "license": "mit",
+  "keywords": ["files","uploader","upload"],
   "authors": [
     {
       "name": "Craig Humphreys"
